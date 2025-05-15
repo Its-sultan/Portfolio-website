@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thabit Sultan - Portfolio</title>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #11171e;
+            color: #ededed;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            background: #11171e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Desktop Navigation */
+        .navbar {
+            display: flex;
+            gap: 35px;
+        }
+
+        .navbar a {
+            font-size: 18px;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #0ef;
+        }
+
+        /* Mobile Menu System */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background: #11171e;
+            padding: 20px;
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu .close-btn {
+            text-align: right;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Home Section */
+        .home {
+            padding: 150px 5% 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .home-content {
+            max-width: 600px;
+        }
+
+        .home-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .home-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .home-content p {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .home-sci {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .home-sci a {
+            font-size: 24px;
+            color: #0ef;
+            transition: 0.3s;
+        }
+
+        .home-sci a:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-box {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #0ef;
+            border-radius: 40px;
+            font-size: 16px;
+            color: #081b29;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .about-img {
+            flex: 1 1 300px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+
+        .about-text {
+            flex: 1 1 500px;
+        }
+
+        .about-text h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .about-text h4 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Skills Section */
+        .sub-title {
+            text-align: center;
+            font-size: 40px;
+            padding: 100px 5% 50px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 0 5%;
+        }
+
+        .container1 {
+            flex: 1 1 400px;
+            background: #1d293a;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .Technical-bars .bar {
+            margin: 25px 0;
+        }
+
+        .Technical-bars i {
+            font-size: 2rem;
+        }
+
+        .progress-line {
+            height: 5px;
+            background: #081b29;
+            border-radius: 3px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .progress-line span {
+            position: absolute;
+            height: 100%;
+            background: #0ef;
+            border-radius: 3px;
+        }
+
+        .html span { width: 90%; }
+        .css span { width: 85%; }
+        .javascript span { width: 75%; }
+        .python span { width: 80%; }
+        .react span { width: 70%; }
+
+        .radial-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .radial-bars {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .radial-bars svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .radial-bars circle {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+
+        .radial-bars circle:nth-child(1) {
+            stroke: #081b29;
+        }
+
+        .radial-bars circle:nth-child(2) {
+            stroke: #0ef;
+            stroke-dasharray: 314;
+            animation: progress 1s ease-in-out forwards;
+        }
+
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Portfolio Section */
+        .portfolio-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+        }
+
+        .row {
+            background: #1d293a;
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .row:hover {
+            transform: translateY(-10px);
+        }
+
+        .row img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-text {
+            flex: 1 1 400px;
+        }
+
+        .contact-form {
+            flex: 1 1 400px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #1d293a;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .send {
+            background: #0ef;
+            color: #081b29;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .home-content h1 {
+                font-size: 40px;
+            }
+
+            .radial-container {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+
+            .skills-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu,
+            .overlay {
+                display: none;
+            }
+        }
+
+        @keyframes progress {
+            from { stroke-dashoffset: 314; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Portfolio.</a>
+        
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <i class='bx bx-menu hamburger'></i>
+    </header>
+
+    <div class="overlay"></div>
+    <div class="mobile-menu">
+        <div class="close-btn"><i class='bx bx-x'></i></div>
+        <nav class="mobile-nav">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, It's your Dev</h3>
+            <h1>Thabit Sultan</h1>
+            <h3>And I'm a <span id="text"></span></h3>
+            <p>I'm a web Developer with extensive experience for 2 years. Expertise is to create web design, Frontend design, and many more.</p>
+            <div class="home-sci">
+                <a href="#"><i class='bx bxl-github'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+            </div>
+            <a href="#" class="btn-box">More About Me</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="img/thabit.jpg" alt="Thabit Sultan">
+        </div>
+        <div class="about-text">
+            <h2>About <span>Me</span></h2>
+            <h4>Full Stack Developer!🧑🏽‍💻</h4>
+            <p>I am a second-year Computer Science student with two years of experience in web development. Passionate about crafting intuitive UI designs and building seamless digital experiences.</p>
+            <a href="#" class="btn-box">Download CV</a>
+        </div>
+    </section>
+
+    <h1 class="sub-title">My <span>Skills</span></h1>
+    <section id="skills">
+        <div class="skills-container">
+            <div class="container1">
+                <h2>Technical Skills</h2>
+                <div class="Technical-bars">
+                    <div class="bar">
+                        <i class='bx bxl-html5' style="color: #c95d2e"></i>
+                        <div class="progress-line html"><span></span></div>
+                    </div>
+                    <div class="bar">
+                        <i class='bx bxl-css3' style="color: #147bbc"></i>
+                        <div class="progress-line css"><span></span></div>
+                    </div>
+                    <div class="bar">
+                        <i class='bx bxl-javascript' style="color: #b0bc1e"></i>
+                        <div class="progress-line javascript"><span></span></div>
+                    </div>
+                    <div class="bar">
+                        <i class='bx bxl-python' style="color: #c32ec9"></i>
+                        <div class="progress-line python"><span></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container1">
+                <h2>Professional Skills</h2>
+                <div class="radial-container">
+                    <div class="radial-bars">
+                        <svg>
+                            <circle cx="60" cy="60" r="50"></circle>
+                            <circle cx="60" cy="60" r="50" style="stroke-dashoffset: calc(314 - (314 * 90) / 100)"></circle>
+                        </svg>
+                        <div class="percentage">90%</div>
+                        <div class="text">Creativity</div>
+                    </div>
+                    <div class="radial-bars">
+                        <svg>
+                            <circle cx="60" cy="60" r="50"></circle>
+                            <circle cx="60" cy="60" r="50" style="stroke-dashoffset: calc(314 - (314 * 70) / 100)"></circle>
+                        </svg>
+                        <div class="percentage">70%</div>
+                        <div class="text">Communication</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h1 class="sub-title">Latest <span>Projects</span></h1>
+        <div class="portfolio-content">
+            <div class="row">
+                <img src="img/project1.jpg" alt="Project 1">
+                <div class="layer">
+                    <h5>UI/UX Design</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+            <!-- Add more projects -->
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-text">
+            <h2>Contact <span>Me</span></h2>
+            <div class="contact-list">
+                <li><i class='bx bxs-send'></i> email@example.com</li>
+                <li><i class='bx bxs-phone'></i> +255 123 456 789</li>
+            </div>
+        </div>
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea cols="30" rows="10" placeholder="Message" required></textarea>
+                <button type="submit" class="send">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+        const closeBtn = document.querySelector('.close-btn');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        [closeBtn, overlay].forEach(el => {
+            el.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
+        // Typed.js
+        const typed = new Typed('#text', {
+            strings: ['Frontend Developer', 'UI/UX Designer', 'Full Stack Developer'],
+            typeSpeed: 100,
+            backSpeed: 100,
+            backDelay: 1000,
+            loop: true
+        });
+
+        // Close menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
